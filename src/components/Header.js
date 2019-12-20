@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <div className="ui secondary purple pointing menu ">
       <div className="active header item left">Herolo Weather App</div>
-      <a href="/" className="active item">
+      <Link to={"/"} className="active item">
         Home
-      </a>
-      <a href="/" className="item">
+      </Link>
+      <Link to={"/favorites"} className="item">
         Favorites
-      </a>
+      </Link>
     </div>
   );
 };

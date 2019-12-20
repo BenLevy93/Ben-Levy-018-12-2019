@@ -15,3 +15,19 @@ export const searchCity = city => {
     }
   });
 };
+
+export const getCurrentConditions = cityKey => {
+  return instance.get(`/currentconditions/v1/${cityKey}`, {
+    params: {
+      apikey: KEY
+    }
+  });
+};
+
+export const getFiveDaysForecast = cityKey => {
+  return instance.get(`/forecasts/v1/daily/5day/${cityKey}`, {
+    params: {
+      apikey: KEY
+    }
+  });
+};
