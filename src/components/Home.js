@@ -1,32 +1,36 @@
 import React, { Component } from "react";
-import { tokyoData, tokyo5 } from "../data/mock";
 import DayCard from "./DayCard";
 import CurrentCard from "./CurrentCard";
+import { fetchCity } from "../actions";
+import { connect } from "react-redux";
+import _ from "lodash";
 
 class Home extends Component {
   state = {
-    cityName: "Tokyo",
-    cityData: tokyoData[0],
-    weekForecast: tokyo5.DailyForecasts
+    cityKey: "215854",
+    cityName: "Tel Aviv"
   };
+  componentDidMount() {
+    this.props.fetchCity({ value: "Tel Aviv", key: "215854" });
+  }
   getImage(image) {
     return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
   }
 
   renderToday() {
-    let { WeatherIcon, WeatherText, Temperature } = this.state.cityData;
-    let { Value } = Temperature.Metric;
+    let { WeatherIcon, WeatherText, Temperature } = this.props.currentWeather;
+
     return (
       <CurrentCard
         imgSrc={this.getImage(WeatherIcon)}
-        header={this.state.cityName}
-        temp={Value.toFixed(0)}
+        header={this.props.name}
+        temp={_.get(Temperature, "Metric.Value", 10)}
         desc={WeatherText}
       />
     );
   }
   renderList() {
-    return this.state.weekForecast.map((item, index) => {
+    return this.props.fiveDays.map((item, index) => {
       let { Date: dayName, Day, Temperature } = item;
       return (
         <DayCard
@@ -50,5 +54,11 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = state => {
+  return {
+    name: state.forecast.name,
+    currentWeather: state.forecast.currentWeather,
+    fiveDays: state.forecast.fiveDays
+  };
+};
+export default connect(mapStateToProps, { fetchCity })(Home);

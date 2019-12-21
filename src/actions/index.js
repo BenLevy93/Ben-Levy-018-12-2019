@@ -1,16 +1,25 @@
 import { getCurrentConditions, getFiveDaysForecast } from "../api/config";
 import {
+  SET_NAME,
   SET_CURRENT,
   SET_FIVE_DAYS,
   ADD_FAVORITE,
   DELETE_FAVORITE
 } from "./types";
 
-export const fetchCity = async cityKey => {
-  let curWetherRes = await getCurrentConditions(cityKey);
-  currentWeather(curWetherRes.data);
-  let fiveDaysRes = await getFiveDaysForecast(cityKey);
-  fiveDaysWeather(fiveDaysRes.data.DailyForecasts);
+export const fetchCity = city => async dispatch => {
+  console.log("From fetchCity", city);
+  let curWetherRes = await getCurrentConditions(city.key);
+  let fiveDaysRes = await getFiveDaysForecast(city.key);
+  dispatch(setCityName(city.value));
+  dispatch(currentWeather(curWetherRes.data[0]));
+  dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
+};
+const setCityName = name => {
+  return {
+    type: SET_NAME,
+    payload: name
+  };
 };
 
 const currentWeather = currentForecast => {

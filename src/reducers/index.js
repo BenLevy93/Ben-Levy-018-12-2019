@@ -3,6 +3,6 @@ import favoriteReducer from "./favoriteReducer";
 import weatherReducer from "./weatherReducer";
 
 export default combineReducers({
-  foreCast: weatherReducer,
+  forecast: weatherReducer,
   favorites: favoriteReducer
 });

@@ -13,22 +13,28 @@ class SearchBar extends Component {
     obj.key = city.Key;
     return obj;
   };
-  promiseSearch = async inputValue => {
+  getOptions = async inputValue => {
     let res = await searchCity(inputValue);
     return res.data.map(city => this.setFormat(city));
+  };
+  handleChange = selectedValue => {
+    this.setState({ term: selectedValue });
+    this.props.fetchCity(selectedValue);
+    this.setState({ term: "" });
   };
 
   render() {
     return (
       <AsyncSelect
+        value={this.state.term}
         placeholder="Search city"
-        onChange={val => fetchCity(val.key)}
+        onChange={this.handleChange}
         cacheOptions
         defaultOptions
-        loadOptions={this.promiseSearch}
+        loadOptions={this.getOptions}
       />
     );
   }
 }
 
-export default connect(null)(SearchBar);
+export default connect(null, { fetchCity })(SearchBar);

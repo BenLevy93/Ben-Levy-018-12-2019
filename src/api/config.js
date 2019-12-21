@@ -27,7 +27,8 @@ export const getCurrentConditions = cityKey => {
 export const getFiveDaysForecast = cityKey => {
   return instance.get(`/forecasts/v1/daily/5day/${cityKey}`, {
     params: {
-      apikey: KEY
+      apikey: KEY,
+      metric: true
     }
   });
 };
