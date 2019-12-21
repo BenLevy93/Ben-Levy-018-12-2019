@@ -1,27 +1,28 @@
 import React, { Component } from "react";
 import AsyncSelect from "react-select/async";
 import { searchCity } from "../api/config";
-import { compose } from "redux";
+import { connect } from "react-redux";
+import { fetchCity } from "../actions";
 class SearchBar extends Component {
   state = { term: "" };
 
-  setValues = name => {
+  setFormat = city => {
     let obj = {};
-    obj.label = name.LocalizedName;
-    obj.value = name.LocalizedName;
-    obj.key = name.Key;
+    obj.label = city.LocalizedName;
+    obj.value = city.LocalizedName;
+    obj.key = city.Key;
     return obj;
   };
   promiseSearch = async inputValue => {
     let res = await searchCity(inputValue);
-    return res.data.map(city => this.setValues(city));
+    return res.data.map(city => this.setFormat(city));
   };
 
   render() {
     return (
       <AsyncSelect
-        placeholder="Search cityy"
-        onChange={val => console.log(val)}
+        placeholder="Search city"
+        onChange={val => fetchCity(val.key)}
         cacheOptions
         defaultOptions
         loadOptions={this.promiseSearch}
@@ -30,4 +31,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default connect(null)(SearchBar);
