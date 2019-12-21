@@ -8,13 +8,13 @@ import {
 } from "./types";
 
 export const fetchCity = city => async dispatch => {
-  console.log("From fetchCity", city);
   let curWetherRes = await getCurrentConditions(city.key);
   let fiveDaysRes = await getFiveDaysForecast(city.key);
   dispatch(setCityName(city));
   dispatch(currentWeather(curWetherRes.data[0]));
   dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
 };
+
 const setCityName = nameAndKey => {
   return {
     type: SET_NAME,

@@ -7,7 +7,6 @@ class CurrentCard extends React.Component {
   checkCity() {
     let { favorList, curCity } = this.props;
     let filterd = favorList.filter(city => city === curCity);
-    console.log(filterd);
     return filterd.length <= 0;
   }
   //conditional rendring whether add or remove to favorites

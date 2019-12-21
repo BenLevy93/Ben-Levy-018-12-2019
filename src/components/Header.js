@@ -1,18 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { render } from "@testing-library/react";
 
-const Header = () => {
-  return (
-    <div className="ui secondary purple pointing menu ">
-      <div className="active header item left">Herolo Weather App</div>
-      <Link to={"/"} className="active item">
-        Home
-      </Link>
-      <Link to={"/favorites"} className="item">
-        Favorites
-      </Link>
-    </div>
-  );
-};
+class Header extends React.Component {
+  state = {
+    pageFlag: false
+  };
+  render() {
+    return (
+      <div className="ui secondary purple pointing menu ">
+        <div className="active header item left">Herolo Weather App</div>
+        <Link
+          to={"/"}
+          className={`item ${this.state.pageFlag ? "" : "active"}`}
+          onClick={() => this.setState({ pageFlag: !this.state.pageFlag })}
+        >
+          Home
+        </Link>
+        <Link
+          onClick={() => this.setState({ pageFlag: !this.state.pageFlag })}
+          to={"/favorites"}
+          className={`item ${this.state.pageFlag ? "active" : ""}`}
+        >
+          Favorites
+        </Link>
+      </div>
+    );
+  }
+}
 
 export default Header;

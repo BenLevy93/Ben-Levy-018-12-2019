@@ -6,14 +6,10 @@ import { connect } from "react-redux";
 import _ from "lodash";
 
 class Home extends Component {
-  state = {
-    cityKey: "215854",
-    cityName: "Tel Aviv"
-  };
-  componentDidMount() {
-    //default value
-    this.props.fetchCity({ label: "Tel Aviv", key: "215854" });
-  }
+  // componentDidMount() {
+  //   //default value
+  //   this.props.fetchCity({ label: "Tel Aviv", key: "215854" });
+  // }
   getImage(image) {
     return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
   }
@@ -25,7 +21,7 @@ class Home extends Component {
       <CurrentCard
         imgSrc={this.getImage(WeatherIcon)}
         header={this.props.value.label}
-        temp={_.get(Temperature, "Metric.Value", 10)}
+        temp={_.get(Temperature, "Metric.Value", 10).toFixed(0)}
         desc={WeatherText}
       />
     );
@@ -38,8 +34,8 @@ class Home extends Component {
           key={index}
           day={new Date(dayName).getDay()}
           imgSrc={this.getImage(Day.Icon)}
-          minVal={Temperature.Minimum.Value}
-          maxVal={Temperature.Maximum.Value}
+          minVal={Temperature.Minimum.Value.toFixed(0)}
+          maxVal={Temperature.Maximum.Value.toFixed(0)}
         />
       );
     });
@@ -62,4 +58,4 @@ const mapStateToProps = state => {
     fiveDays: state.forecast.fiveDays
   };
 };
-export default connect(mapStateToProps, { fetchCity })(Home);
+export default connect(mapStateToProps)(Home);
