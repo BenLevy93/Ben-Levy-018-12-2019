@@ -11,7 +11,8 @@ class Home extends Component {
     cityName: "Tel Aviv"
   };
   componentDidMount() {
-    this.props.fetchCity({ value: "Tel Aviv", key: "215854" });
+    //default value
+    this.props.fetchCity({ label: "Tel Aviv", key: "215854" });
   }
   getImage(image) {
     return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
@@ -23,7 +24,7 @@ class Home extends Component {
     return (
       <CurrentCard
         imgSrc={this.getImage(WeatherIcon)}
-        header={this.props.name}
+        header={this.props.value.label}
         temp={_.get(Temperature, "Metric.Value", 10)}
         desc={WeatherText}
       />
@@ -56,7 +57,7 @@ class Home extends Component {
 }
 const mapStateToProps = state => {
   return {
-    name: state.forecast.name,
+    value: state.forecast.value,
     currentWeather: state.forecast.currentWeather,
     fiveDays: state.forecast.fiveDays
   };

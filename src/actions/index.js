@@ -11,14 +11,14 @@ export const fetchCity = city => async dispatch => {
   console.log("From fetchCity", city);
   let curWetherRes = await getCurrentConditions(city.key);
   let fiveDaysRes = await getFiveDaysForecast(city.key);
-  dispatch(setCityName(city.value));
+  dispatch(setCityName(city));
   dispatch(currentWeather(curWetherRes.data[0]));
   dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
 };
-const setCityName = name => {
+const setCityName = nameAndKey => {
   return {
     type: SET_NAME,
-    payload: name
+    payload: nameAndKey
   };
 };
 
@@ -35,13 +35,13 @@ const fiveDaysWeather = fiveDaysForecast => {
     payload: fiveDaysForecast
   };
 };
-const addFavorite = city => {
+export const addFavorite = city => {
   return {
     type: ADD_FAVORITE,
     payload: city
   };
 };
-const deleteFavorite = city => {
+export const deleteFavorite = city => {
   return {
     type: DELETE_FAVORITE,
     payload: city

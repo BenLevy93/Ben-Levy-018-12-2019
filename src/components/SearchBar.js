@@ -9,7 +9,6 @@ class SearchBar extends Component {
   setFormat = city => {
     let obj = {};
     obj.label = city.LocalizedName;
-    obj.value = city.LocalizedName;
     obj.key = city.Key;
     return obj;
   };
