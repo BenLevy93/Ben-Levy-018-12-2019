@@ -3,6 +3,8 @@ import AsyncSelect from "react-select/async";
 import { searchCity } from "../api/config";
 import { connect } from "react-redux";
 import { fetchCity } from "../actions";
+import { ToastsStore } from "react-toasts";
+import validator from "validator";
 class SearchBar extends Component {
   state = { term: "" };
 
@@ -13,12 +15,26 @@ class SearchBar extends Component {
     return obj;
   };
   getOptions = async inputValue => {
-    let res = await searchCity(inputValue);
-    return res.data.map(city => this.setFormat(city));
+    if (inputValue !== "") {
+      if (!this.cityNameValidation(inputValue)) {
+        return ToastsStore.warning("Search by english letters only");
+      }
+      try {
+        let res = await searchCity(inputValue);
+        return res.data.map(city => this.setFormat(city));
+      } catch (e) {
+        ToastsStore.error("Failed to make a search , ", e);
+      }
+    }
+  };
+  cityNameValidation = cityName => {
+    const words = cityName.split(" ");
+    return words.every(w => validator.isAlpha(w) || w === " ");
   };
   handleChange = selectedValue => {
     this.setState({ term: selectedValue });
     this.props.fetchCity(selectedValue);
+    ToastsStore.success("New city come up");
     this.setState({ term: "" });
   };
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DayCard from "./DayCard";
 import CurrentCard from "./CurrentCard";
-import { fetchCity } from "../actions";
 import { connect } from "react-redux";
 import _ from "lodash";
 

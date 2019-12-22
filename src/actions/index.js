@@ -1,4 +1,5 @@
 import { getCurrentConditions, getFiveDaysForecast } from "../api/config";
+import { ToastsStore } from "react-toasts";
 import {
   SET_NAME,
   SET_CURRENT,
@@ -8,11 +9,15 @@ import {
 } from "./types";
 
 export const fetchCity = city => async dispatch => {
-  let curWetherRes = await getCurrentConditions(city.key);
-  let fiveDaysRes = await getFiveDaysForecast(city.key);
-  dispatch(setCityName(city));
-  dispatch(currentWeather(curWetherRes.data[0]));
-  dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
+  try {
+    let curWetherRes = await getCurrentConditions(city.key);
+    let fiveDaysRes = await getFiveDaysForecast(city.key);
+    dispatch(setCityName(city));
+    dispatch(currentWeather(curWetherRes.data[0]));
+    dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
+  } catch (e) {
+    ToastsStore.error("Failed to load city , ", e);
+  }
 };
 
 const setCityName = nameAndKey => {
@@ -36,12 +41,14 @@ const fiveDaysWeather = fiveDaysForecast => {
   };
 };
 export const addFavorite = city => {
+  ToastsStore.success("Added");
   return {
     type: ADD_FAVORITE,
     payload: city
   };
 };
 export const deleteFavorite = city => {
+  ToastsStore.warning("Removed");
   return {
     type: DELETE_FAVORITE,
     payload: city

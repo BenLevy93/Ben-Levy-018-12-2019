@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import FaveCard from "./Favorites/FaveCard";
 import { fetchCity } from "../actions";
 import { connect } from "react-redux";
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path="/" component={SearchBar} />
             <Route exact path="/" component={Home} />
             <Route exact path="/favorites" component={FaveCard} />
+            <ToastsContainer store={ToastsStore} />
           </div>
         </BrowserRouter>
       </div>
