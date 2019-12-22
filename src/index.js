@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import reduxThunk from "redux-thunk";
 import App from "./components/App";
 import reducers from "./reducers";
+import "./styles/style.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

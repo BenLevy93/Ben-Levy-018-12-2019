@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getCurrentConditions } from "../../api/config";
 import { deleteFavorite, fetchCity } from "../../actions";
 import { Link } from "react-router-dom";
+import { ToastsStore } from "react-toasts";
 import _ from "lodash";
 
 class FaveCard extends React.Component {
@@ -28,7 +29,7 @@ class FaveCard extends React.Component {
       let { Temperature, WeatherText } = city.forecast;
       return (
         <div className="column">
-          <div className="ui purple card">
+          <div id="faveCard" className="ui purple card">
             <div className="content">
               <div className="ui medium header">{city.value.label}</div>
             </div>
@@ -41,7 +42,13 @@ class FaveCard extends React.Component {
               <Link
                 to={"/"}
                 className="ui purple button"
-                onClick={() => this.props.fetchCity(city.value)}
+                onClick={() => {
+                  try {
+                    this.props.fetchCity(city.value);
+                  } catch (e) {
+                    ToastsStore.error("Failed to load data");
+                  }
+                }}
               >
                 Details
               </Link>
@@ -58,7 +65,7 @@ class FaveCard extends React.Component {
     });
   }
   render() {
-    if (this.props.faveList) {
+    if (this.props.faveList.length > 0) {
       return (
         <div className="ui five column stackable grid">{this.renderList()}</div>
       );

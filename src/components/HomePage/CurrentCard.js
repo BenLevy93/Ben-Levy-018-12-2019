@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addFavorite, deleteFavorite } from "../actions";
+import { addFavorite, deleteFavorite } from "../../actions";
 
 class CurrentCard extends React.Component {
   //check if the current city is already in favorites
@@ -41,12 +41,16 @@ class CurrentCard extends React.Component {
     return (
       <div className=" column row">
         <div className="column">
-          <img className="ui image small" src={imgSrc} alt="icon" />
+          <img className="ui image small" src={imgSrc} alt="" />
         </div>
         <div className="column">
-          <h1 className="header">{header}</h1>
-          <h3>{`${temp} C°, 
-            ${desc}`}</h3>
+          <h1 className="header">{header || "Loading..."}</h1>
+          <h3>
+            {temp !== ""
+              ? `${temp.toFixed(0)} C°, 
+            ${desc}`
+              : ""}
+          </h3>
         </div>
         {this.addOrDelete()}
       </div>

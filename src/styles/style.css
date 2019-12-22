@@ -1,0 +1,18 @@
+body {
+  background: linear-gradient(
+    60deg,
+    rgb(193, 252, 242) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+}
+#currentCard {
+  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+}
+
+#dayCard,
+#faveCard {
+  background: rgba(148, 187, 233, 0.1);
+}
+#searchField {
+  background: red;
+}

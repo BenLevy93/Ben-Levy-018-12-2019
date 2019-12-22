@@ -16,6 +16,7 @@ export const fetchCity = city => async dispatch => {
     dispatch(currentWeather(curWetherRes.data[0]));
     dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
   } catch (e) {
+    console.log("Here");
     ToastsStore.error("Failed to load city , ", e);
   }
 };

@@ -23,7 +23,7 @@ class SearchBar extends Component {
         let res = await searchCity(inputValue);
         return res.data.map(city => this.setFormat(city));
       } catch (e) {
-        ToastsStore.error("Failed to make a search , ", e);
+        ToastsStore.error("Failed to make a search: ", e);
       }
     }
   };
@@ -32,15 +32,51 @@ class SearchBar extends Component {
     return words.every(w => validator.isAlpha(w) || w === " ");
   };
   handleChange = selectedValue => {
-    this.setState({ term: selectedValue });
-    this.props.fetchCity(selectedValue);
-    ToastsStore.success("New city come up");
-    this.setState({ term: "" });
+    try {
+      this.setState({ term: selectedValue });
+      this.props.fetchCity(selectedValue);
+      this.setState({ term: "" });
+    } catch (e) {
+      ToastsStore.error("Failed to load data,Please try agian later :)");
+    }
   };
-
+  customStyles = {
+    control: (base, state) => ({
+      ...base,
+      width: "50%",
+      background: "lightblue",
+      // match with the menu
+      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+      // Overwrittes the different states of border
+      borderColor: state.isFocused ? "blue" : "purple",
+      // Removes weird border around container
+      boxShadow: state.isFocused ? null : null,
+      "&:hover": {
+        // Overwrittes the different states of border
+        borderColor: state.isFocused ? "blue" : "purple"
+      }
+    }),
+    menu: base => ({
+      ...base,
+      width: "50%",
+      flex: 1,
+      justifyContent: "center",
+      background: "lightblue",
+      // override border radius to match the box
+      borderRadius: 0,
+      // kill the gap
+      marginTop: 0
+    }),
+    menuList: base => ({
+      ...base,
+      // kill the white space on first and last option
+      padding: 0
+    })
+  };
   render() {
     return (
       <AsyncSelect
+        styles={this.customStyles}
         value={this.state.term}
         placeholder="Search city"
         onChange={this.handleChange}

@@ -5,12 +5,13 @@ import { connect } from "react-redux";
 import _ from "lodash";
 
 class Home extends Component {
-  // componentDidMount() {
-  //   //default value
-  //   this.props.fetchCity({ label: "Tel Aviv", key: "215854" });
-  // }
+  componentDidMount() {
+    //default value
+  }
   getImage(image) {
-    return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
+    if (image) {
+      return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
+    }
   }
 
   renderToday() {
@@ -20,7 +21,7 @@ class Home extends Component {
       <CurrentCard
         imgSrc={this.getImage(WeatherIcon)}
         header={this.props.value.label}
-        temp={_.get(Temperature, "Metric.Value", 10).toFixed(0)}
+        temp={_.get(Temperature, "Metric.Value", "")}
         desc={WeatherText}
       />
     );
@@ -41,7 +42,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className="ui secondary purple segment">
+      <div id="currentCard" className="ui secondary purple segment">
         <div className="ui five column stackable grid">
           {this.renderToday()}
           {this.renderList()}

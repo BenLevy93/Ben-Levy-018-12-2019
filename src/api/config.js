@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const KEY = "6IDU8FAlr7qsO7jCia7Gap3ACP7otnxE";
+const KEY = "rS2xdYYpsGR5HTRuzMZO2khwOkhZrkSa";
 
 let instance = axios.create({
   baseURL: "http://dataservice.accuweather.com",
@@ -12,6 +12,15 @@ export const searchCity = city => {
     params: {
       apikey: KEY,
       q: city
+    }
+  });
+};
+export const getCityByCords = (lat, lng) => {
+  let latNlng = `${lat},${lng}`;
+  return instance.get("/locations/v1/cities/geoposition/search", {
+    params: {
+      apikey: KEY,
+      q: latNlng
     }
   });
 };

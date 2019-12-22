@@ -11,7 +11,7 @@ let days = [
 const DayCard = ({ day, imgSrc, minVal, maxVal }) => {
   return (
     <div className="column">
-      <div className="ui purple card">
+      <div id="dayCard" className="ui purple card">
         <div className="content">
           <div className="ui medium header">{days[day]}</div>
         </div>
