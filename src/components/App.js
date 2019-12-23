@@ -11,6 +11,7 @@ import { ToastsContainer, ToastsStore } from "react-toasts";
 
 class App extends Component {
   componentDidMount() {
+    console.log("Test");
     navigator.geolocation.getCurrentPosition(
       this.geoLocationSuccess,
       this.geoLocationFail.bind(this)
