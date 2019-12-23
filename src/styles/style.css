@@ -6,6 +6,10 @@ body {
   color: black;
   background: lightgrey;
 }
+#toggleF {
+  color: #a160b4;
+}
+
 #darkCurrentCard {
   color: #a160b4;
   background: rgb(44, 44, 44);
@@ -14,9 +18,11 @@ body {
   color: white;
   background: rgb(44, 44, 44);
 }
-
+label {
+  color: red;
+}
 #dayCard {
-  background: rgba(130, 222, 245, 0.1);
+  background: rgba(127, 183, 197, 0.363);
 }
 #nightCard {
   background: rgba(134, 166, 197, 0.3);

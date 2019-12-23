@@ -43,7 +43,7 @@ class CurrentCard extends React.Component {
           onClick={() => this.props.toggleUnits()}
         >
           <input type="checkbox" name="newsletter" />
-          <label>Change to F</label>
+          <label id="toggleF">F°</label>
         </div>
       </div>
     );

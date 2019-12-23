@@ -3,7 +3,7 @@ import axios from "axios";
 const KEY = "UmkXd1Bi01aRaKGSiwsST8648chynwUE";
 
 let instance = axios.create({
-  baseURL: "https://cors-anywhere.herokuapp.com/dataservice.accuweather.com",
+  baseURL: "https://dataservice.accuweather.com",
   timeout: 3000
 });
 
