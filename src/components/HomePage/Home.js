@@ -8,9 +8,6 @@ class Home extends Component {
   state = {
     units: false
   };
-  componentDidMount() {
-    //default value
-  }
   toggleUnits = () => {
     this.setState({ units: !this.state.units });
   };

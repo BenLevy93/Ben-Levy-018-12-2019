@@ -4,34 +4,15 @@ import { connect } from "react-redux";
 import { changeTheme } from "../actions";
 
 class Header extends React.Component {
-  state = {
-    mode: false
-  };
-  // handelTheme = theme => {
-  //   if (!theme) {
-  //     this.props.changeTheme(true);
-  //   } else {
-  //     this.props.changeTheme(false);
-  //   }
-  // };
-
   render() {
     return (
       <div className="ui secondary pointing purple menu ">
         <div className="active header item left">Herolo App</div>
 
-        <Link
-          onClick={() => this.setState({ favePage: false })}
-          to={"/"}
-          className={`item ${this.state.favePage ? "" : ""}`}
-        >
+        <Link to={"/"} className="item">
           Home
         </Link>
-        <Link
-          onClick={() => this.setState({ favePage: true })}
-          to={"/favorites"}
-          className={`item ${this.state.favePage ? "" : ""}`}
-        >
+        <Link to={"/favorites"} className="item">
           Favorites
         </Link>
         <div style={{ display: "flex", alignItems: "center" }}>

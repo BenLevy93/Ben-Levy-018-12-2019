@@ -55,12 +55,6 @@ class FaveCard extends React.Component {
               >
                 Details
               </Link>
-              {/* <div
-                  className="ui basic red button"
-                  onClick={() => this.props.deleteFavorite(city.value)}
-                >
-                  Delete
-                </div> */}
             </div>
           </div>
         </div>
