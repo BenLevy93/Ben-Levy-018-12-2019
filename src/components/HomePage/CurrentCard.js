@@ -39,7 +39,7 @@ class CurrentCard extends React.Component {
     return (
       <div className="right floated column">
         <div
-          class="ui slider checkbox"
+          className="ui slider checkbox"
           onClick={() => this.props.toggleUnits()}
         >
           <input type="checkbox" name="newsletter" />
