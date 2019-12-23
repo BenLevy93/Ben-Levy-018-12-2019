@@ -18,7 +18,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="ui secondary pointing purple menu ">
-        <div className="active header item left">Herolo Weather App</div>
+        <div className="active header item left">Herolo App</div>
 
         <Link
           onClick={() => this.setState({ favePage: false })}
