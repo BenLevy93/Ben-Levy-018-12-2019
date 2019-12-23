@@ -5,14 +5,31 @@ import { connect } from "react-redux";
 import _ from "lodash";
 
 class Home extends Component {
+  state = {
+    units: false
+  };
   componentDidMount() {
     //default value
   }
+  toggleUnits = () => {
+    this.setState({ units: !this.state.units });
+  };
   getImage(image) {
     if (image) {
       return `https://vortex.accuweather.com/adc2010/images/slate/icons/${image}.svg`;
     }
   }
+  getTemp = temp => {
+    if (temp !== "") {
+      if (this.state.units) {
+        //F
+        return (temp * 1.8 + 32).toFixed(0);
+      } else {
+        //C
+        return temp.toFixed(0);
+      }
+    }
+  };
 
   renderToday() {
     let { WeatherIcon, WeatherText, Temperature } = this.props.currentWeather;
@@ -21,8 +38,11 @@ class Home extends Component {
       <CurrentCard
         imgSrc={this.getImage(WeatherIcon)}
         header={this.props.value.label}
-        temp={_.get(Temperature, "Metric.Value", "")}
+        temp={this.getTemp(_.get(Temperature, "Metric.Value", ""))}
         desc={WeatherText}
+        units={this.state.units}
+        toggleUnits={this.toggleUnits}
+        unitType={this.state.units ? "F" : "C"}
       />
     );
   }
@@ -34,8 +54,8 @@ class Home extends Component {
           key={index}
           day={new Date(dayName).getDay()}
           imgSrc={this.getImage(Day.Icon)}
-          minVal={Temperature.Minimum.Value.toFixed(0)}
-          maxVal={Temperature.Maximum.Value.toFixed(0)}
+          minVal={this.getTemp(Temperature.Minimum.Value)}
+          maxVal={this.getTemp(Temperature.Maximum.Value)}
         />
       );
     });

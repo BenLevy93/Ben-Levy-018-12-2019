@@ -5,12 +5,12 @@ body {
     rgba(148, 187, 233, 1) 100%
   );
 }
-#currentCard {
+#currentCard,
+#faveCard {
   background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 
-#dayCard,
-#faveCard {
+#dayCard {
   background: rgba(148, 187, 233, 0.1);
 }
 #searchField {

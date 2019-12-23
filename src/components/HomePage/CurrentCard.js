@@ -35,9 +35,22 @@ class CurrentCard extends React.Component {
       );
     }
   };
+  celsiusOrFahrenheit = () => {
+    return (
+      <div className="right floated column">
+        <div
+          class="ui slider checkbox"
+          onClick={() => this.props.toggleUnits()}
+        >
+          <input type="checkbox" name="newsletter" />
+          <label>Change to F</label>
+        </div>
+      </div>
+    );
+  };
 
   render() {
-    let { imgSrc, header, temp, desc } = this.props;
+    let { imgSrc, header, temp, desc, unitType } = this.props;
     return (
       <div className=" column row">
         <div className="column">
@@ -46,12 +59,11 @@ class CurrentCard extends React.Component {
         <div className="column">
           <h1 className="header">{header || "Loading..."}</h1>
           <h3>
-            {temp !== ""
-              ? `${temp.toFixed(0)} C°, 
-            ${desc}`
-              : ""}
+            {`${temp}° ${unitType},
+            ${desc}`}
           </h3>
         </div>
+        {this.celsiusOrFahrenheit()}
         {this.addOrDelete()}
       </div>
     );
