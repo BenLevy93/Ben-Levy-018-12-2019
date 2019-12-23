@@ -25,7 +25,6 @@ class FaveCard extends React.Component {
     this.setState({ list: cities });
   };
   renderList() {
-    console.log("faveCard", this.props.darkMode);
     return this.state.list.map(city => {
       let { Temperature, WeatherText } = city.forecast;
       return (

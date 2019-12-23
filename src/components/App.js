@@ -24,7 +24,6 @@ class App extends Component {
       let { LocalizedName, Key } = res.data;
       this.props.fetchCity({ label: LocalizedName, key: Key });
     } catch (e) {
-      console.log("geoLocationSuccess", e);
       return ToastsStore.error(`Failed to load data: ${e}`);
     }
   };
