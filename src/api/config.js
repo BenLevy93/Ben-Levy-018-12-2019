@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const KEY = "59sCPegjBujf0TLGoNhtHTjhnjPgd4X3";
+const KEY = "EAJG4q1zeexz2VRCWwIQkgIGuePquGAg";
 
 let instance = axios.create({
   baseURL: "http://dataservice.accuweather.com",

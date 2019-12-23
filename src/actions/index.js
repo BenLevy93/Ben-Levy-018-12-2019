@@ -5,7 +5,8 @@ import {
   SET_CURRENT,
   SET_FIVE_DAYS,
   ADD_FAVORITE,
-  DELETE_FAVORITE
+  DELETE_FAVORITE,
+  TOGGLE_THEME
 } from "./types";
 
 export const fetchCity = city => async dispatch => {
@@ -16,8 +17,7 @@ export const fetchCity = city => async dispatch => {
     dispatch(currentWeather(curWetherRes.data[0]));
     dispatch(fiveDaysWeather(fiveDaysRes.data.DailyForecasts));
   } catch (e) {
-    console.log("Here");
-    ToastsStore.error("Failed to load city , ", e);
+    ToastsStore.error(`Failed to load city: ${e}`);
   }
 };
 
@@ -53,5 +53,11 @@ export const deleteFavorite = city => {
   return {
     type: DELETE_FAVORITE,
     payload: city
+  };
+};
+export const changeTheme = flag => {
+  return {
+    type: TOGGLE_THEME,
+    payload: flag
   };
 };

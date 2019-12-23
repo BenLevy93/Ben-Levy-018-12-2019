@@ -8,12 +8,12 @@ let days = [
   "Friday",
   "Saturday"
 ];
-const DayCard = ({ day, imgSrc, minVal, maxVal }) => {
+const DayCard = ({ day, imgSrc, minVal, maxVal, darkMode }) => {
   return (
     <div className="column">
-      <div id="dayCard" className="ui purple card">
+      <div id={darkMode ? "nightCard" : "dayCard"} className="ui purple card">
         <div className="content">
-          <div className="ui medium header">{days[day]}</div>
+          <h3>{days[day]}</h3>
         </div>
         <div className="content">
           <img className="ui image mini left floated" src={imgSrc} alt="icon" />

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchCity } from "../actions";
 import { ToastsStore } from "react-toasts";
 import validator from "validator";
+import { customStyles } from "../styles/searchStyle";
 class SearchBar extends Component {
   state = { term: "" };
 
@@ -21,15 +22,17 @@ class SearchBar extends Component {
       }
       try {
         let res = await searchCity(inputValue);
+        if (res.status !== "OK" || res.status !== "200") {
+        }
         return res.data.map(city => this.setFormat(city));
       } catch (e) {
-        ToastsStore.error("Failed to make a search: ", e);
+        return ToastsStore.error(`Failed to make a search: ${e}`);
       }
     }
   };
   cityNameValidation = cityName => {
     const words = cityName.split(" ");
-    return words.every(w => validator.isAlpha(w) || w === " ");
+    return words.every(word => validator.isAlpha(word) || word === " ");
   };
   handleChange = selectedValue => {
     try {
@@ -37,46 +40,14 @@ class SearchBar extends Component {
       this.props.fetchCity(selectedValue);
       this.setState({ term: "" });
     } catch (e) {
-      ToastsStore.error("Failed to load data,Please try agian later :)");
+      ToastsStore.error(`Failed to load data: ${e}`);
     }
   };
-  customStyles = {
-    control: (base, state) => ({
-      ...base,
-      width: "50%",
-      background: "lightblue",
-      // match with the menu
-      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
-      // Overwrittes the different states of border
-      borderColor: state.isFocused ? "blue" : "purple",
-      // Removes weird border around container
-      boxShadow: state.isFocused ? null : null,
-      "&:hover": {
-        // Overwrittes the different states of border
-        borderColor: state.isFocused ? "blue" : "purple"
-      }
-    }),
-    menu: base => ({
-      ...base,
-      width: "50%",
-      flex: 1,
-      justifyContent: "center",
-      background: "lightblue",
-      // override border radius to match the box
-      borderRadius: 0,
-      // kill the gap
-      marginTop: 0
-    }),
-    menuList: base => ({
-      ...base,
-      // kill the white space on first and last option
-      padding: 0
-    })
-  };
+
   render() {
     return (
       <AsyncSelect
-        styles={this.customStyles}
+        styles={customStyles}
         value={this.state.term}
         placeholder="Search city"
         onChange={this.handleChange}

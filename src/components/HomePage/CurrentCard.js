@@ -51,22 +51,26 @@ class CurrentCard extends React.Component {
 
   render() {
     let { imgSrc, header, temp, desc, unitType } = this.props;
-    return (
-      <div className=" column row">
-        <div className="column">
-          <img className="ui image small" src={imgSrc} alt="" />
-        </div>
-        <div className="column">
-          <h1 className="header">{header || "Loading..."}</h1>
-          <h3>
-            {`${temp}° ${unitType},
+    if (header) {
+      return (
+        <div className=" column row">
+          <div className="column">
+            <img className="ui image small" src={imgSrc} alt="" />
+          </div>
+          <div className="column">
+            <h1 className="header">{header || ""}</h1>
+            <h2>
+              {`${temp}° ${unitType},
             ${desc}`}
-          </h3>
+            </h2>
+          </div>
+          {this.celsiusOrFahrenheit()}
+          {this.addOrDelete()}
         </div>
-        {this.celsiusOrFahrenheit()}
-        {this.addOrDelete()}
-      </div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 const mapStateToProps = state => {

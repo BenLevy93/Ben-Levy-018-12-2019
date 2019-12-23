@@ -1,18 +1,23 @@
 body {
-  background: linear-gradient(
-    60deg,
-    rgb(193, 252, 242) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
+  background-color: #555555;
 }
 #currentCard,
 #faveCard {
-  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+  color: black;
+  background: lightgrey;
+}
+#darkCurrentCard {
+  color: #a160b4;
+  background: rgb(44, 44, 44);
+}
+#darkFaveCard {
+  color: white;
+  background: rgb(44, 44, 44);
 }
 
 #dayCard {
-  background: rgba(148, 187, 233, 0.1);
+  background: rgba(130, 222, 245, 0.1);
 }
-#searchField {
-  background: red;
+#nightCard {
+  background: rgba(134, 166, 197, 0.3);
 }

@@ -11,7 +11,6 @@ import { ToastsContainer, ToastsStore } from "react-toasts";
 
 class App extends Component {
   componentDidMount() {
-    console.log("Test");
     navigator.geolocation.getCurrentPosition(
       this.geoLocationSuccess,
       this.geoLocationFail.bind(this)
@@ -25,16 +24,15 @@ class App extends Component {
       let { LocalizedName, Key } = res.data;
       this.props.fetchCity({ label: LocalizedName, key: Key });
     } catch (e) {
-      ToastsStore.error("Failed to load data,Please try agian later :)");
+      return ToastsStore.error(`Failed to load data: ${e}`);
     }
   };
   geoLocationFail() {
     //set default city
-    console.log(this.props);
     try {
       this.props.fetchCity({ label: "Tel Aviv", key: "215854" });
     } catch (e) {
-      ToastsStore.error("Failed to load data,Please try agian later :)");
+      ToastsStore.error(`Failed to load data: ${e}`);
     }
   }
   render() {

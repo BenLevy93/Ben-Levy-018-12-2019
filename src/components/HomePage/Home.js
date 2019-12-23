@@ -56,13 +56,17 @@ class Home extends Component {
           imgSrc={this.getImage(Day.Icon)}
           minVal={this.getTemp(Temperature.Minimum.Value)}
           maxVal={this.getTemp(Temperature.Maximum.Value)}
+          darkMode={this.props.darkMode}
         />
       );
     });
   }
   render() {
     return (
-      <div id="currentCard" className="ui secondary purple segment">
+      <div
+        id={this.props.darkMode ? "darkCurrentCard" : "currentCard"}
+        className="ui secondary segment"
+      >
         <div className="ui five column stackable grid">
           {this.renderToday()}
           {this.renderList()}
@@ -75,7 +79,8 @@ const mapStateToProps = state => {
   return {
     value: state.forecast.value,
     currentWeather: state.forecast.currentWeather,
-    fiveDays: state.forecast.fiveDays
+    fiveDays: state.forecast.fiveDays,
+    darkMode: state.darkMode
   };
 };
 export default connect(mapStateToProps)(Home);
